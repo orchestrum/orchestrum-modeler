@@ -1,0 +1,103 @@
+[
+  {
+    "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.3.0/resources/schema.json",
+    "name": "Email Task",
+    "id": "com.orchestrum.engine.task.MailTask",
+    "templateVersionId": "1",
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "properties": [
+      {
+        "label": "Implementation Type",
+        "type": "String",
+        "value": "com.orchestrum.engine.task.MailTask",
+        "editable": false,
+        "binding": {
+          "type": "property",
+          "name": "camunda:class"
+        }
+      },
+      {
+        "label": "Sender",
+        "type": "String",
+        "binding": {
+          "type": "camunda:property",
+          "name": "sender"
+        },
+        "constraints": {
+          "notEmpty": true,
+          "pattern": {
+            "value": "^[A-z0-9._%+-]+@[A-z0-9.-]+\\.[A-z]{2,}$",
+            "message": "Must be a valid email."
+          }
+        }
+      },
+      {
+        "label": "Receivers",
+        "type": "String",
+        "binding": {
+          "type": "camunda:property",
+          "name": "receivers"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "label": "Template",
+        "description": "By the way, you can use <a href=\"https://freemarker.apache.org/\">freemarker templates</a> here",
+        "type": "String",
+        "binding": {
+          "type": "camunda:property",
+          "name": "messageBody",
+          "scriptFormat": "freemarker"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "value": "expression-value",
+        "label": "Error Expression",
+        "type": "Hidden",
+        "binding": {
+          "type": "camunda:errorEventDefinition",
+          "errorRef": "Email_Error"
+        }
+      }
+    ],
+    "scopes": [
+      {
+        "type": "bpmn:Error",
+        "id": "Email_Error",
+        "properties": [
+          {
+            "value": "error-code",
+            "label": "Error Code",
+            "binding": {
+              "type": "property",
+              "name": "errorCode"
+            }
+          },
+          {
+            "value": "error-message",
+            "label": "Error Message",
+            "binding": {
+              "type": "property",
+              "name": "camunda:errorMessage"
+            }
+          },
+          {
+            "value": "error-name",
+            "label": "Error Name",
+            "binding": {
+              "type": "property",
+              "name": "name"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

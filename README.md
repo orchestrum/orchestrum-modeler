@@ -21,8 +21,8 @@ An integrated modeling solution for BPMN and DMN based on [bpmn.io](http://bpmn.
 Build the app in a Posix environment. On Windows that is Git Bash or WSL.
 
 ```sh
-# checkout a tag
-git checkout v1.1.0
+# install sinon manually (version < 5 is required)
+npm install sinon@2.1.0
 
 # install dependencies
 npm install
