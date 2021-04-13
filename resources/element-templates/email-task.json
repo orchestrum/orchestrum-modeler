@@ -19,11 +19,11 @@
         }
       },
       {
-        "label": "Sender",
+        "label": "To",
         "type": "String",
         "binding": {
           "type": "camunda:property",
-          "name": "sender"
+          "name": "to"
         },
         "constraints": {
           "notEmpty": true,
@@ -34,24 +34,52 @@
         }
       },
       {
-        "label": "Receivers",
+        "label": "Cc",
         "type": "String",
         "binding": {
           "type": "camunda:property",
-          "name": "receivers"
+          "name": "cc"
+        },
+        "constraints": {
+          "notEmpty": false,
+          "pattern": {
+            "value": "^[A-z0-9._%+-]+@[A-z0-9.-]+\\.[A-z]{2,}$",
+            "message": "Must be a valid email."
+          }
+        }
+      },
+      {
+        "label": "Bcc",
+        "type": "String",
+        "binding": {
+          "type": "camunda:property",
+          "name": "bcc"
+        },
+        "constraints": {
+          "notEmpty": false,
+          "pattern": {
+            "value": "^[A-z0-9._%+-]+@[A-z0-9.-]+\\.[A-z]{2,}$",
+            "message": "Must be a valid email."
+          }
+        }
+      },
+      {
+        "label": "Subject",
+        "type": "String",
+        "binding": {
+          "type": "camunda:property",
+          "name": "subject"
         },
         "constraints": {
           "notEmpty": true
         }
       },
       {
-        "label": "Template",
-        "description": "By the way, you can use <a href=\"https://freemarker.apache.org/\">freemarker templates</a> here",
+        "label": "Text",
         "type": "String",
         "binding": {
           "type": "camunda:property",
-          "name": "messageBody",
-          "scriptFormat": "freemarker"
+          "name": "text"
         },
         "constraints": {
           "notEmpty": true
